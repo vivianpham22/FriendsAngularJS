@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html ng-app="FriendApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Teaching AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+</head>
+
+
+<body>
+    <!--<div ng-init="friends=[{name:'Vivian Pham', city:'Ohio'}, {name:'Alicia Piek', city:'Michigan'}, {name:'Quinn Lydon', city:'Africa'}]">
+        Name: <input type="text" ng-model="name" /> {{name}}
+        <br />
+        <ul>
+            <li ng-repeat="fren in friends | filter: name | orderBy:'city'">{{fren.name | uppercase}} is from {{fren.city | lowercase}}</li>
+        </ul>
+    </div>-->
+
+
+    <!--Top is our view-->
+    <!--<div ng-controller="SimpleController">
+
+        Name: <input type="text" ng-model="name" />
+        <br />
+        <ul>
+            <li ng-repeat="fren in friends | filter: name | orderBy:'city'">{{fren.name | lowercase}} is from {{fren.city | uppercase}}</li>
+        </ul>
+    </div>-->
+
+
+    <!--CONTROLLER | VIEW | SCOPE (view model)-->
+    <!--Placeholder for views-->
+    <div>
+        <div ng-view></div>
+    </div>
+
+    <script>
+        // First create the Angular App using the name defined at ng-app
+        var myApp = angular.module('FriendApp', ['ngRoute']);
+        myApp.config(function ($routeProvider) {
+            $routeProvider
+            .when('/', {
+                controller: 'SimpleController',
+                templateUrl: 'Partials/View1.html'
+
+            })
+            .when('/View2', {
+                controller: 'SimpleController',
+                templateUrl: 'Partials/View2.html'
+
+            })
+            .otherwise({ redirectTo: '/' });
+        });
+
+        myApp.factory("simpleFactory", function () {
+            var friends = [
+                { name: 'Vivian Pham', state: 'California' },
+                { name: 'Alicia Piek', state: 'Michigan' },
+                { name: 'Quinn Lydon', state: 'Ohio' }
+            ];
+
+            var factory = {};
+            factory.getFriends = function () {
+                return friends;
+            };
+            factory.postFriend = function (friend) {
+
+            };
+
+            return factory;
+        });
+
+        
+
+
+        //Defining Controller
+        myApp.controller('SimpleController', function($scope, simpleFactory) {
+            $scope.friends = [];
+                //{ name: 'Vivian Pham', state: 'California' },
+                //{ name: 'Alicia Piek', state: 'Michigan' },
+                //{ name: 'Quinn Lydon', state: 'Ohio' }
+            //];
+
+            init();
+
+            function init() {
+                $scope.friends = simpleFactory.getFriends();
+            }
+
+
+            //Creating name and city to PUSH into the list
+            $scope.addFriend = function () {
+                $scope.friends.push(
+                    {
+                        name: $scope.Friend.name,
+                        state: $scope.Friend.state
+                    });
+            };
+
+        });
+
+    </script>
+
+
+</body>
+</html>

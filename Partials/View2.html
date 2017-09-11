@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+</head>
+<body>
+
+    <div>
+        <h1>View 2</h1>
+        State: <input type="text" ng-model="state" />
+        <br />
+        <ul>
+            <li ng-repeat="fren in friends | filter: state | orderBy:'state'">{{fren.name | lowercase}} is from {{fren.state | uppercase}}</li>
+        </ul>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+</head>
+<body>
+
+    <h1>Where Are You From?</h1>
+    Name: <input type="text" ng-model="filter.name" />
+    <br />
+    <ul>
+        <li ng-repeat="fren in friends | filter: filter.name | orderBy:'state'">{{fren.name}} is from {{fren.state | uppercase}}</li>
+    </ul>
+
+    <br />
+
+    Friends Name: <br />
+    <input type="text" ng-model="Friend.name" />
+
+    <br />
+    <br />
+
+    Friends State: <br />
+    <input type="text" ng-model="Friend.state" />
+
+    <br />
+    <br />
+
+    <button ng-click="addFriend()">Add Friend</button>
+
+    <br />
+    <br />
+
+    <a href="/Partials/View2.html">View 2</a>
+
+
+</body>
+</html>
